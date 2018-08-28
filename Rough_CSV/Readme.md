@@ -1,0 +1,1 @@
+#Files that I used to create a sample CSV to get something for Vlad to build his dataframes around. This was before I realized that everything would need to go through dynamodb, and was not supposed to be our final code. Since we didn't finish dynamodb though I want to demonstrate what we based the analysis on
