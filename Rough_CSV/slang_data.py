@@ -6,7 +6,7 @@ from tweepy import Stream
 #Variables that contains the user credentials to access Twitter API
 access_token ="1012402072052957185-Txm1yLugHsMiTxTDMuaLUYY7kF7nLL"
 
-access_token_secret = "TxxT2ZNiT8JY58bUcMlHAzmNjSZjrEunqLFRxkajEE7i7"
+access_token_secret = ""
 
 consumer_key = "vdfRaONJbNQcWK5nqzUt34jIu"
 consumer_secret = "EN9kfxsgJHxQ0gR2CGrno2DDdTzBxKXJHyltMWNCJWAViEheW9"
