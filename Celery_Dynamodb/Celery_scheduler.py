@@ -1,3 +1,5 @@
+#Testing git, getting used to git workflow
+
 #James2
 import datetime
 from celery import Celery
@@ -7,6 +9,7 @@ import json
 
 #!/usr/bin/env python3
 import boto3
+
 
 consumer_key = 'vdfRaONJbNQcWK5nqzUt34jIu'
 consumer_secret = ''
