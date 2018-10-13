@@ -19,6 +19,7 @@ def dynamo_setup():
     # Any clients created from this session will use credentials from the [default] section of ~/.aws/credentials.
     dev_s3_client = session.client('s3')
     # Get the service resource.
+
     dynamodb_resource = boto3.resource('dynamodb')
     dynamodb_client = boto3.client('dynamodb')
 
@@ -67,6 +68,42 @@ def makeit(*client_resource):
     return table
 
 def fillit(table):
+
+    dynamodb = boto3.resource('dynamodb')
+
+    return dynamodb
+
+
+def makeit(dynamodb):
+    '''Creates dynamodb table'''
+    # Create the DynamoDB table.
+    table = dynamodb.create_table(
+        TableName='tweedata1',
+        KeySchema=[
+            {
+                'AttributeName': 'tweet_id',
+                'KeyType': 'HASH'
+            },
+        ],
+        AttributeDefinitions=[
+            {
+                'AttributeName': 'tweet_id',
+                'AttributeType': 'S'
+            },
+        ],
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 5,
+            'WriteCapacityUnits': 5
+        }
+    )
+    # Wait until the table exists.
+    table.meta.client.get_waiter('table_exists').wait(TableName='tweedata1')
+
+    return table
+
+def fillit(table):
+
+
     filler_list = []
     filler = dict()
 
@@ -82,6 +119,10 @@ def fillit(table):
         filler['created_at'] = t.tweets[x]['created_at']
         filler['text'] = t.tweets[x]['text']
         filler_list.append(filler)
+
+
+
+
     #print(filler_list)
     #Adds all entries in list to dynamodb table at the same time
     with table.batch_writer() as batch:
@@ -91,8 +132,13 @@ def fillit(table):
 
 def main():
     
+
     client_resource = dynamo_setup() 
     table = makeit(*client_resource) 
+
+    dynamodb = dynamo_setup() 
+    table = makeit(dynamodb) 
+
     fillit(table)
 
 main()
