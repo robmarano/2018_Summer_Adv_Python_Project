@@ -25,24 +25,23 @@ def save_tweets(cursor):
     '''Stores tweets in json format in order to prepare them for being placed
     in dynamodb database'''
 
+   # data = cursor._json
+
     tweets = []
     item_count = 0
-
     for tweet in cursor.items():
         tweets.append(tweet._json)
-
         item_count +=1
         if item_count>=100:
             break
 
-    json_tweets = json.dumps(tweets)
+    clean_tweets = []
+    for tweet in tweets:
+        if not tweet['text'].startswith('RT '): 
+            clean_tweets.append(tweet)
 
-    #print(len(json_tweets))
-
-    #print(type(json_tweets))
-
-    #print(json_tweets)
-
+#    print(len(clean_tweets))
+    return clean_tweets
 
 def main():
 
@@ -50,3 +49,6 @@ def main():
     save_tweets(cursor)
 
 main()
+
+cursor = tweepy_setup()
+clean_tweets = save_tweets(cursor)
