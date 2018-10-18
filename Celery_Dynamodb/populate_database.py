@@ -72,15 +72,15 @@ def fillit(table):
 
     #Creates a dictionary for selected components of each tweet, (tweet_id,
     #lang etc.) then combines all tweet dictionaries together in a list 
-    for x in range(len(t.tweets)):
+    for x in range(len(t.clean_tweets)):
         filler = {}
-        filler['tweet_id']= t.tweets[x]['id_str']
-        filler['lang'] = t.tweets[x]['lang']
-        filler['user_id'] = t.tweets[x]['user']['id']
-        filler['location'] = t.tweets[x]['user']['location'] if \
+        filler['tweet_id']= t.clean_tweets[x]['id_str']
+        filler['lang'] = t.clean_tweets[x]['lang']
+        filler['user_id'] = t.clean_tweets[x]['user']['id']
+        filler['location'] = t.clean_tweets[x]['user']['location'] if \
         t.tweets[x]['user']['location'] else None
-        filler['created_at'] = t.tweets[x]['created_at']
-        filler['text'] = t.tweets[x]['text']
+        filler['created_at'] = t.clean_tweets[x]['created_at']
+        filler['text'] = t.clean_tweets[x]['text']
         filler_list.append(filler)
     #print(filler_list)
     #Adds all entries in list to dynamodb table at the same time
