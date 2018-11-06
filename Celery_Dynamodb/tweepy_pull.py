@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
+
 import tweepy
 import json
 import tweepyconfig as config
 import oauth2
-
 
 def tweepy_setup():
     '''Sets up tweepy API authorization using credentials from config file, kept
@@ -14,18 +15,15 @@ def tweepy_setup():
     auth.set_access_token(config.access_token, config.access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
-    query = 'ratchet'
+    query = 'lit'
 
     cursor = tweepy.Cursor(api.search, q=query, count=100) 
 
     return cursor 
 
-
 def save_tweets(cursor):
     '''Stores tweets in json format in order to prepare them for being placed
     in dynamodb database'''
-
-   # data = cursor._json
 
     tweets = []
     item_count = 0
@@ -40,15 +38,6 @@ def save_tweets(cursor):
         if not tweet['text'].startswith('RT '): 
             clean_tweets.append(tweet)
 
-#    print(len(clean_tweets))
     return clean_tweets
 
-def main():
 
-    cursor = tweepy_setup()
-    save_tweets(cursor)
-
-main()
-
-cursor = tweepy_setup()
-clean_tweets = save_tweets(cursor)
