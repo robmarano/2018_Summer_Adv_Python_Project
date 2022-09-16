@@ -24,7 +24,7 @@ future==0.16.0
 idna==2.6
 jmespath==0.9.3
 jsonschema==2.6.0
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 mock==2.0.0
 oauthlib==2.1.0
